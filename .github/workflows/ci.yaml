@@ -9,8 +9,8 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'maven'
-          java-package: '23'
+          distribution: 'temurin'
+          java-version: '23'
       - name: run tests
         run: mvn clean test
       - name: Publish Test Result
