@@ -1,0 +1,21 @@
+name: My Super App Integration
+run-name: Job started by ${{github.actor}}
+on: [ push ]
+jobs:
+  Maven-Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-package: '23'
+      - name: run tests
+        run: mvn clean test
+      - name: Publish Test Result
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            target/surefire-reports/**/*.xml
